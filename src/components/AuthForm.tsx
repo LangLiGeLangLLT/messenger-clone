@@ -6,6 +6,9 @@ import Input from './ui/Input'
 import Button from './ui/Button'
 import AuthSocialButton from './AuthSocialButton'
 import { BsGithub, BsGoogle } from 'react-icons/bs'
+import axios from 'axios'
+import toast from 'react-hot-toast'
+import { signIn } from 'next-auth/react'
 
 type Variant = 'LOGIN' | 'REGISTER'
 
@@ -33,18 +36,46 @@ function AuthForm() {
     },
   })
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true)
+    try {
+      if (variant === 'REGISTER') {
+        await axios.post('/api/register', data)
+      }
 
-    if (variant === 'REGISTER') {
-    }
+      if (variant === 'LOGIN') {
+        const callback = await signIn('credentials', {
+          ...data,
+          redirect: false,
+        })
 
-    if (variant === 'LOGIN') {
+        if (callback?.error) {
+          toast.error('Invalid credentials')
+        } else if (callback?.ok) {
+          toast.success('Success')
+        }
+      }
+    } catch {
+      toast.error('Something went wrong')
+    } finally {
+      setIsLoading(false)
     }
   }
 
   const socialAction = (action: string) => {
     setIsLoading(true)
+
+    signIn(action, { redirect: false })
+      .then((callback) => {
+        if (callback?.error) {
+          toast.error('Invalid credentials')
+        } else if (callback?.ok) {
+          toast.success('Success')
+        }
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
 
   return (

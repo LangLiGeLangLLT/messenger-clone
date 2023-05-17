@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
       return new NextResponse('Unauthorized', { status: 401 })
     }
 
-    if (isGroup && (!members || members.length || !name)) {
+    if (isGroup && (!members || members.length < 2 || !name)) {
       return new NextResponse('Invalid Data', { status: 400 })
     }
 

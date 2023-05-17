@@ -7,8 +7,14 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   danger?: boolean
 }
 
-function Button({ fullWidth, secondary, danger, ...props }: ButtonProps) {
-  const { children, disabled } = props
+function Button({
+  fullWidth,
+  secondary,
+  danger,
+  children,
+  disabled,
+  ...props
+}: ButtonProps) {
   return (
     <button
       {...props}

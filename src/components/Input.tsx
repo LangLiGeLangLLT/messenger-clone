@@ -9,8 +9,15 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   errors: FieldErrors
 }
 
-function Input({ label, register, errors, ...props }: InputProps) {
-  const { id, required, disabled } = props
+function Input({
+  label,
+  register,
+  errors,
+  id,
+  required,
+  disabled,
+  ...props
+}: InputProps) {
   return (
     <div>
       <label

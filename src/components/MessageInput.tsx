@@ -9,9 +9,13 @@ interface MessageInput extends InputHTMLAttributes<HTMLInputElement> {
   errors: FieldErrors
 }
 
-function MessageInput({ register, errors, ...props }: MessageInput) {
-  const { id, required } = props
-
+function MessageInput({
+  register,
+  errors,
+  id,
+  required,
+  ...props
+}: MessageInput) {
   return (
     <div className="relative w-full">
       <input

@@ -6,8 +6,11 @@ interface AuthSocialButtonProps
   icon: IconType
 }
 
-function AuthSocialButton({ icon: Icon, ...props }: AuthSocialButtonProps) {
-  const { children } = props
+function AuthSocialButton({
+  icon: Icon,
+  children,
+  ...props
+}: AuthSocialButtonProps) {
   return (
     <button
       {...props}

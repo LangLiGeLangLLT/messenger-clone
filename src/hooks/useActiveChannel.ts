@@ -27,7 +27,7 @@ const useActiveChannel = () => {
       add(member.id)
     })
 
-    channel.bind('pusher:member_remove', (member: Record<string, any>) => {
+    channel.bind('pusher:member_removed', (member: Record<string, any>) => {
       remove(member.id)
     })
 

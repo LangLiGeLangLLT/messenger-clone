@@ -23,7 +23,7 @@ function Body({ initialMessages }: BodyProps) {
   }, [conversationId])
 
   useEffect(() => {
-    pusherClient.subscribe(conversationId)
+    pusherClient.subscribe(conversationId as string)
     bottomRef?.current?.scrollIntoView()
 
     const messageHandler = (message: FullMessageType) => {
@@ -56,7 +56,7 @@ function Body({ initialMessages }: BodyProps) {
     pusherClient.bind('messages:update', updateMessageHandler)
 
     return () => {
-      pusherClient.unsubscribe(conversationId)
+      pusherClient.unsubscribe(conversationId as string)
       pusherClient.unbind('messages:new', messageHandler)
       pusherClient.unbind('messages:update', updateMessageHandler)
     }
